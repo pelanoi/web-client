@@ -1,0 +1,35 @@
+.weather {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  position: relative;
+  padding-bottom: 40px !important;
+
+  .temperature {
+    font-size: 40px;
+    font-weight: 600;
+
+    span {
+      font-weight: 100;
+    }
+  }
+
+  .values {
+    margin: 0 auto;
+
+    th {
+      font-weight: normal;
+      text-align: left;
+    }
+
+    td {
+      font-weight: bold;
+    }
+  }
+
+  .footer {
+    font-size: 12px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+}
