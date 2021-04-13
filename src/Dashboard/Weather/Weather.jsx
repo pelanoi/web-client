@@ -57,15 +57,15 @@ export function Weather() {
                 <th>Vânt:</th>
                 <td>{measurement.windspeed?.toFixed(2)} km/h</td>
               </tr>
-              <tr>
+              {measurement.windspeed > 0 && <tr>
                 <td><FontAwesomeIcon icon={faCompass}/></td>
                 <th>Direcție vânt:</th>
                 <td>{degToCompass(measurement.winddir)}</td>
-              </tr>
+              </tr>}
             </tbody>
           </table>
           <div className={styles.footer}>
-            Ultima actualizare: {measurement.time && formatDistanceToNow(measurement.time, {
+            Actualizat: {measurement.time && formatDistanceToNow(measurement.time, {
           addSuffix: true,
           locale: roLocale
         })}</div>
