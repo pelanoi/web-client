@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import { Dashboard } from './Dashboard/Dashboard';
 import reportWebVitals from './reportWebVitals';
+import ReactGA from 'react-ga';
+
+if (process.env.NODE_ENV !== 'development') {
+  ReactGA.initialize('UA-19732240-7', {
+    debug: process.env.NODE_ENV === 'development'
+  });
+}
 
 ReactDOM.render(
   <React.StrictMode>

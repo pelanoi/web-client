@@ -16,7 +16,6 @@ export function Weather() {
 
   function fetchWeather() {
     weatherApi.getLatest().then(function(response) {
-      console.log("response:", response);
       setMeasurement(response);
     })
     .catch(function(err) {
