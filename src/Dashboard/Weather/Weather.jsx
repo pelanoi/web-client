@@ -49,7 +49,7 @@ export function Weather() {
               <tr>
                 <td><FontAwesomeIcon icon={faUmbrella}/></td>
                 <th>Precipitații:</th>
-                <td>{measurement.rain} mm</td>
+                <td>{measurement.rain?.toFixed(2)} mm</td>
               </tr>
               <tr>
                 <td><FontAwesomeIcon icon={faWind}/></td>
