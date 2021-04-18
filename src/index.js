@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import { Dashboard } from './Dashboard/Dashboard';
+import { App } from './App/App';
 import reportWebVitals from './reportWebVitals';
 import ReactGA from 'react-ga';
 
@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'development') {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Dashboard />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -6,10 +6,10 @@ import roLocale from 'date-fns/locale/ro';
 
 import styles from './Weather.module.scss';
 
-import * as weatherApi from '../../api/weather';
-import {TIME} from '../../utils/time';
-import {degToCompass} from '../../utils/compass';
-import {Widget} from '../Widget/Widget';
+import * as weatherApi from '../../../api/weather';
+import {TIME} from '../../../utils/time';
+import {degToCompass} from '../../../utils/compass';
+import {Widget} from '../../../components/Widget/Widget';
 
 export function Weather() {
   const [measurement, setMeasurement] = useState({});
@@ -33,7 +33,7 @@ export function Weather() {
   }, []);
 
   return (
-    <Widget title="Vremea" className={styles.weather}>
+    <Widget title="Vremea" classes={{content: styles.weather}}>
       {measurement &&
         <>
           <div className={styles.temperature}>

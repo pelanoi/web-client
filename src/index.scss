@@ -7,4 +7,11 @@
 html {
   font-family: 'Roboto', sans-serif;
   color: #3F3F3F;
+
+  body {
+    background: url('./background.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
 }
+
+
