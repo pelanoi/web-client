@@ -6,7 +6,8 @@
 		"es6": true
 	},
 	"parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+		"ecmaVersion": 12
   },
 	"plugins": [
     "prettier"
@@ -16,9 +17,6 @@
 		"plugin:react/recommended",
 		"plugin:prettier/recommended"
 	],
-	"parserOptions": {
-		"ecmaVersion": 12
-	},
 	"rules": {
 		"no-console": ["error", { "allow": ["error"] }],
 		"prettier/prettier": [

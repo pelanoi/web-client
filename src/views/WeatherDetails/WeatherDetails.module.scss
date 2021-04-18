@@ -1,3 +1,17 @@
-.chartCard {
-  width: 100%;
+.details {
+  padding: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .chartCard {
+    margin: 10px;
+    width: 100%;
+  }
+}
+
+[data-tolltip-table] {
+  th {
+    text-align: left;
+  }
 }

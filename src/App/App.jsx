@@ -1,12 +1,8 @@
-// import styles from './App.module.scss';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Dashboard } from '../views/Dashboard/Dashboard';
-import { WeatherDetails } from '../views/WeatherDetails/WeatherDetails';
+import { Dashboard } from "../views/Dashboard/Dashboard";
+import { WeatherDetails } from "../views/WeatherDetails/WeatherDetails";
 
 export function App() {
   return (
@@ -20,5 +16,5 @@ export function App() {
         </Route>
       </Switch>
     </Router>
-  )
+  );
 }
