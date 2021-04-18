@@ -1,1 +1,1 @@
-export const weatherAPI = 'http://localhost:3000';
+export const weatherAPI = "http://localhost:3000";

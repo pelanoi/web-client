@@ -5,9 +5,12 @@ import {
   faUmbrella,
   faWind,
   faCompass,
+  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { formatDistanceToNow } from "date-fns";
 import roLocale from "date-fns/locale/ro";
+import { Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 import styles from "./Weather.module.scss";
 
@@ -18,6 +21,7 @@ import { Widget } from "../../../components/Widget/Widget";
 
 export function Weather() {
   const [measurement, setMeasurement] = useState({});
+  const history = useHistory();
 
   function fetchWeather() {
     weatherApi.getLatest().then(setMeasurement).catch(console.error);
@@ -33,7 +37,23 @@ export function Weather() {
   }, []);
 
   return (
-    <Widget title="Vremea" classes={{ content: styles.weather }}>
+    <Widget
+      title={
+        <>
+          Vremea{" "}
+          <Button
+            className={styles.detailsBtn}
+            variant="contained"
+            size="small"
+            endIcon={<FontAwesomeIcon icon={faChevronRight} />}
+            onClick={() => history.push("/details")}
+          >
+            Ultima oră
+          </Button>
+        </>
+      }
+      classes={{ content: styles.weather }}
+    >
       {measurement && (
         <>
           <div className={styles.temperature}>

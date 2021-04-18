@@ -1,5 +1,5 @@
-import axios from 'axios';
-import config from '../config';
+import axios from "axios";
+import config from "../config";
 
 const configDefaults = {
   baseURL: config.weatherAPI,
@@ -8,20 +8,19 @@ const configDefaults = {
 export function request(url, options) {
   const requestOptions = {
     ...configDefaults,
-    ...options
+    ...options,
   };
 
-  return axios.request(url, requestOptions)
-    .then(function(response) {
-      return response.data;
-    });
+  return axios.request(url, requestOptions).then(function (response) {
+    return response.data;
+  });
 }
 
 export function get(url, options) {
   const requestOptions = {
     method: "GET",
-    ...options
-  }
+    ...options,
+  };
 
   return request(url, requestOptions);
 }

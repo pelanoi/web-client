@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 
 import styles from "./Widget.module.scss";
 
@@ -12,3 +13,10 @@ export function Widget({ title, className, classes, children }) {
     </div>
   );
 }
+
+Widget.propTypes = {
+  title: PropTypes.node,
+  className: PropTypes.string,
+  classes: PropTypes.object,
+  children: PropTypes.node,
+};

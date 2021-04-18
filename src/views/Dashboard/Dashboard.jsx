@@ -1,10 +1,11 @@
-import ReactGA from 'react-ga';
+import React from "react";
+import ReactGA from "react-ga";
 
-import styles from './Dashboard.module.scss';
-import {Weather} from './Weather/Weather';
+import styles from "./Dashboard.module.scss";
+import { Weather } from "./Weather/Weather";
 
 export function Dashboard() {
-  ReactGA.pageview('dashboard');
+  ReactGA.pageview("dashboard");
 
   return (
     <div className={styles.dashboard}>
@@ -12,5 +13,5 @@ export function Dashboard() {
 
       <Weather />
     </div>
-  )
+  );
 }

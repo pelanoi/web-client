@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
-
+import { Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import styles from "./WeatherDetails.module.scss";
 
 import { Widget } from "../../components/Widget/Widget";
@@ -8,12 +11,13 @@ import { getInterval } from "../../api/weather";
 
 export function WeatherDetails() {
   const [data, setData] = useState();
+  const history = useHistory();
 
   useEffect(function fetchData() {
     getInterval().then(setData).catch(console.error);
   }, []);
 
-  const getOptions = (metric, unit) => {
+  const getOptions = () => {
     return {
       xAxis: {
         data: data?.time,
@@ -101,7 +105,23 @@ export function WeatherDetails() {
   return (
     <div className={styles.details}>
       {data && (
-        <Widget title="Ultima oră" className={styles.chartCard}>
+        <Widget
+          title={
+            <>
+              <Button
+                className={styles.backBtn}
+                variant="contained"
+                size="small"
+                startIcon={<FontAwesomeIcon icon={faChevronLeft} />}
+                onClick={() => history.push("/")}
+              >
+                Înapoi
+              </Button>
+              Ultima oră
+            </>
+          }
+          className={styles.chartCard}
+        >
           <ReactECharts
             option={getOptions("temp", "˚C")}
             notMerge={true}
