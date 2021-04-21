@@ -4,6 +4,8 @@ import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import ReactGA from "react-ga";
+
 import styles from "./WeatherDetails.module.scss";
 
 import { Widget } from "../../components/Widget/Widget";
@@ -12,6 +14,8 @@ import { getInterval } from "../../api/weather";
 export function WeatherDetails() {
   const [data, setData] = useState();
   const history = useHistory();
+
+  ReactGA.pageview("weather-details");
 
   useEffect(function fetchData() {
     getInterval().then(setData).catch(console.error);
@@ -46,7 +50,7 @@ export function WeatherDetails() {
             return value.toFixed(2).replace(/[.,]00$/, "");
           }
 
-          let result = `${params[0].axisValue}
+          let result = `La ora <b>${params[0].axisValue}</b>:
           <table data-tolltip-table>
           `;
           params.forEach(function (param) {
