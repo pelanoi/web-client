@@ -103,6 +103,9 @@ export function WeatherDetails() {
         right: "5%",
         bottom: "30px",
       },
+      legend: {
+        show: true,
+      },
     };
   };
 
