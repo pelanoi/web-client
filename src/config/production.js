@@ -1,1 +1,1 @@
-export const weatherAPI = "http://weather.pelanoi.ro";
+export const weatherAPI = "https://weather.pelanoi.ro";
