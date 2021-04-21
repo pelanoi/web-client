@@ -7,8 +7,8 @@ export async function getLatest() {
   return response;
 }
 
-export async function getInterval() {
-  return get("/interval/1h").then(function (response) {
+export async function getInterval(interval) {
+  return get(`/interval/${interval}`).then(function (response) {
     const result = {
       time: [],
       humidity: [],

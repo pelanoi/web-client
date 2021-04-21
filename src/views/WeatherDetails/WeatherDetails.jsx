@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import ReactGA from "react-ga";
+import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core/";
 
 import styles from "./WeatherDetails.module.scss";
 
@@ -13,13 +14,24 @@ import { getInterval } from "../../api/weather";
 
 export function WeatherDetails() {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+  const [interval, setInterval] = useState("1h");
   const history = useHistory();
 
   ReactGA.pageview("weather-details");
 
-  useEffect(function fetchData() {
-    getInterval().then(setData).catch(console.error);
-  }, []);
+  useEffect(
+    function fetchData() {
+      setLoading(true);
+      getInterval(interval)
+        .then(function (response) {
+          setData(response);
+          setLoading(false);
+        })
+        .catch(console.error);
+    },
+    [interval]
+  );
 
   const getOptions = () => {
     return {
@@ -114,7 +126,7 @@ export function WeatherDetails() {
       {data && (
         <Widget
           title={
-            <>
+            <div className={styles.header}>
               <Button
                 className={styles.backBtn}
                 variant="contained"
@@ -124,8 +136,25 @@ export function WeatherDetails() {
               >
                 Înapoi
               </Button>
-              Ultima oră
-            </>
+              <div className={styles.title}>Istoric valori</div>
+              <FormControl variant="filled" className={styles.intervalSelect}>
+                <InputLabel id="demo-simple-select-outlined-label">
+                  Interval
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  value={interval}
+                  onChange={(e) => setInterval(e.target.value)}
+                  label="Age"
+                >
+                  <MenuItem value="1h">Ultima oră</MenuItem>
+                  <MenuItem value="6h">Ultimele 6 ore</MenuItem>
+                  <MenuItem value="12h">Ultimele 12 ore</MenuItem>
+                  <MenuItem value="24h">Ultima zi</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
           }
           className={styles.chartCard}
         >
@@ -137,6 +166,7 @@ export function WeatherDetails() {
             style={{
               height: "400px",
             }}
+            showLoading={loading}
           />
         </Widget>
       )}

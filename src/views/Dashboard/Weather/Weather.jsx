@@ -48,7 +48,7 @@ export function Weather() {
             endIcon={<FontAwesomeIcon icon={faChevronRight} />}
             onClick={() => history.push("/details")}
           >
-            Ultima oră
+            Istoric
           </Button>
         </>
       }

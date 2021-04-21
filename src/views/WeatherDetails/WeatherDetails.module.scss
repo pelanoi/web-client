@@ -1,5 +1,18 @@
-.backBtn {
-  margin-right: 10px;
+.header {
+  display: flex;
+  align-items: center;
+
+  .backBtn {
+    margin-right: 10px;
+  }
+
+  .title {
+    flex: 1
+  }
+
+  .intervalSelect {
+    text-shadow: none;
+  }
 }
 
 .details {
