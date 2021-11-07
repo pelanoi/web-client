@@ -57,7 +57,8 @@ export function Weather() {
       {measurement && (
         <>
           <div className={styles.temperature}>
-            {measurement.temp?.toString().replace(".", ",")} <span>˚C</span>
+            {measurement.temp?.toString().replace(".", ",") || "--"}{" "}
+            <span>˚C</span>
           </div>
           <table className={styles.values}>
             <tbody>
@@ -66,21 +67,21 @@ export function Weather() {
                   <FontAwesomeIcon icon={faTint} />
                 </td>
                 <th>Umiditate:</th>
-                <td>{measurement.humidity}%</td>
+                <td>{measurement.humidity || "--"}%</td>
               </tr>
               <tr>
                 <td>
                   <FontAwesomeIcon icon={faUmbrella} />
                 </td>
                 <th>Precipitații:</th>
-                <td>{measurement.rain?.toFixed(2)} mm</td>
+                <td>{measurement.rain?.toFixed(2) || "--"} mm</td>
               </tr>
               <tr>
                 <td>
                   <FontAwesomeIcon icon={faWind} />
                 </td>
                 <th>Vânt:</th>
-                <td>{measurement.windspeed?.toFixed(2)} km/h</td>
+                <td>{measurement.windspeed?.toFixed(2) || "--"} km/h</td>
               </tr>
               {measurement.windspeed > 0 && (
                 <tr>
@@ -95,11 +96,12 @@ export function Weather() {
           </table>
           <div className={styles.footer}>
             Actualizat:{" "}
-            {measurement.time &&
+            {(measurement.time &&
               formatDistanceToNow(measurement.time, {
                 addSuffix: true,
                 locale: roLocale,
-              })}
+              })) ||
+              "--"}
           </div>
         </>
       )}
