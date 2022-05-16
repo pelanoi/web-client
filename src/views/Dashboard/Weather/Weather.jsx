@@ -18,16 +18,23 @@ import * as weatherApi from "../../../api/weather";
 import { TIME } from "../../../utils/time";
 import { degToCompass } from "../../../utils/compass";
 import { Widget } from "../../../components/Widget/Widget";
+import { Loader } from "../../../components/Loader/Loader";
 
 export function Weather() {
   const [measurement, setMeasurement] = useState({});
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   function fetchWeather() {
-    weatherApi.getLatest().then(setMeasurement).catch(console.error);
+    weatherApi
+      .getLatest()
+      .then(setMeasurement)
+      .then(() => setLoading(false))
+      .catch(console.error);
   }
 
   useEffect(function init() {
+    setLoading(true);
     fetchWeather();
     const fetchInterval = setInterval(fetchWeather, 1 * TIME.MINUTES);
 
@@ -40,7 +47,7 @@ export function Weather() {
     <Widget
       title={
         <>
-          Vremea{" "}
+          Vremea
           <Button
             className={styles.detailsBtn}
             variant="contained"
@@ -54,57 +61,64 @@ export function Weather() {
       }
       classes={{ content: styles.weather }}
     >
-      {measurement && (
-        <>
-          <div className={styles.temperature}>
-            {measurement.temp?.toString().replace(".", ",") || "--"}{" "}
-            <span>˚C</span>
-          </div>
-          <table className={styles.values}>
-            <tbody>
+      <>
+        <div className={styles.temperature}>
+          {measurement.temp?.toString().replace(".", ",") || (
+            <Loader loading={loading} />
+          )}
+          <span className={styles.label}>˚C</span>
+        </div>
+        <table className={styles.values}>
+          <tbody>
+            <tr>
+              <td>
+                <FontAwesomeIcon icon={faTint} />
+              </td>
+              <th>Umiditate:</th>
+              <td>{measurement.humidity || <Loader loading={loading} />}%</td>
+            </tr>
+            <tr>
+              <td>
+                <FontAwesomeIcon icon={faUmbrella} />
+              </td>
+              <th>Precipitații:</th>
+              <td>
+                {measurement.rain?.toFixed(2) || <Loader loading={loading} />}{" "}
+                mm
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <FontAwesomeIcon icon={faWind} />
+              </td>
+              <th>Vânt:</th>
+              <td>
+                {measurement.windspeed?.toFixed(2) || (
+                  <Loader loading={loading} />
+                )}{" "}
+                km/h
+              </td>
+            </tr>
+            {measurement.windspeed > 0 && (
               <tr>
                 <td>
-                  <FontAwesomeIcon icon={faTint} />
+                  <FontAwesomeIcon icon={faCompass} />
                 </td>
-                <th>Umiditate:</th>
-                <td>{measurement.humidity || "--"}%</td>
+                <th>Direcție vânt:</th>
+                <td>{degToCompass(measurement.winddir)}</td>
               </tr>
-              <tr>
-                <td>
-                  <FontAwesomeIcon icon={faUmbrella} />
-                </td>
-                <th>Precipitații:</th>
-                <td>{measurement.rain?.toFixed(2) || "--"} mm</td>
-              </tr>
-              <tr>
-                <td>
-                  <FontAwesomeIcon icon={faWind} />
-                </td>
-                <th>Vânt:</th>
-                <td>{measurement.windspeed?.toFixed(2) || "--"} km/h</td>
-              </tr>
-              {measurement.windspeed > 0 && (
-                <tr>
-                  <td>
-                    <FontAwesomeIcon icon={faCompass} />
-                  </td>
-                  <th>Direcție vânt:</th>
-                  <td>{degToCompass(measurement.winddir)}</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-          <div className={styles.footer}>
-            Actualizat:{" "}
-            {(measurement.time &&
-              formatDistanceToNow(measurement.time, {
-                addSuffix: true,
-                locale: roLocale,
-              })) ||
-              "--"}
-          </div>
-        </>
-      )}
+            )}
+          </tbody>
+        </table>
+        <div className={styles.footer}>
+          Actualizat:{" "}
+          {(measurement.time &&
+            formatDistanceToNow(measurement.time, {
+              addSuffix: true,
+              locale: roLocale,
+            })) || <Loader />}
+        </div>
+      </>
     </Widget>
   );
 }
